@@ -1,0 +1,31 @@
+{
+  "name": "kifly2",
+  "version": "0.0.1",
+  "description": "NodeJs Module Framework for modular backend",
+  "main": "dist/index.ts",
+  "author": "Bence Pimpli <pimplibence@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/immutable": "^3.8.7",
+    "@types/lodash": "^4.14.80",
+    "@types/mocha": "^2.2.44",
+    "@types/node": "^8.0.44",
+    "@types/promise": "^7.1.30",
+    "chai": "^4.1.2",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.4",
+    "mocha": "^4.0.1",
+    "reflect-metadata": "^0.1.10",
+    "rxjs": "^5.5.2",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
+  },
+  "scripts": {
+    "clear": "rm -rf ./dist",
+    "example": "yarn clear && ts-node ./example/index.ts",
+    "build": "yarn clear && tsc",
+    "test": "mocha --recursive -r ts-node/register './**/*.spec.ts'"
+  }
+}
