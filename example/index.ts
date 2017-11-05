@@ -14,5 +14,3 @@ const kernel = new Kernel({
         IndexController
     ]
 });
-
-kernel.events$.subscribe(console.log);

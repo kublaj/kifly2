@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { ServiceConstants } from '../service/constants';
-import { ServiceTypes } from '../service/type';
 import { UidLib } from '../uid.lib';
+import { ServiceTypes } from '../service/type';
 
 export const Controller = (): any => {
     return (target) => {

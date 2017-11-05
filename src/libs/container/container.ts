@@ -1,18 +1,14 @@
 import { Map } from 'immutable';
 import 'reflect-metadata';
-import { Subject } from 'rxjs/Subject';
 import { InjectConstants } from '../inject/constants';
-import { KernelEvent } from '../kernel-event';
 import { ServiceConstants } from '../service/constants';
 import { ServiceTypes } from '../service/type';
 
 export class Container {
-    public events$: Subject<any> = new Subject();
     private members: Map<string, any> = Map({}).asMutable();
     private resolveSingletons: Map<string, any> = Map({}).asMutable();
 
     public addMember(member: any) {
-        this.emitEvent('onContainerMemberRegister', member);
         this.members.set(Reflect.getMetadata(ServiceConstants.DecoratorId, member), member)
     }
 
@@ -29,14 +25,13 @@ export class Container {
             throw new Error(`No registered service -> ${member.name || member.constructor.name}`);
         }
 
+        /**
+         * Resolve requested service
+         */
         if (beforeMiddleware && typeof beforeMiddleware === 'function') {
             beforeMiddleware(target);
         }
 
-        this.emitEvent('onContainerResolveMember', member);
-        /**
-         * Resolve requested service
-         */
         return this.resolveMember(type, id, target);
     }
 
@@ -44,7 +39,7 @@ export class Container {
         if (beforeMiddleware && typeof beforeMiddleware === 'function') {
             beforeMiddleware(target);
         }
-        this.emitEvent('onContainerResolveController', target);
+
         return this.resolveMember(ServiceTypes.Singleton, null, target);
     }
 
@@ -80,9 +75,5 @@ export class Container {
         }
 
         return this.resolveSingletons.get(id);
-    }
-
-    private emitEvent(name: string, payload: any) {
-        this.events$.next(new KernelEvent(name, payload));
     }
 }
