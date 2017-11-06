@@ -6,9 +6,14 @@ import { ComplexService } from '../services/complex.service';
 @Controller()
 export class IndexController {
     @Inject private complexService: ComplexService;
-    
+
     @Route('get', '/')
     public testRoute(req, res) {
+        res.send(this.complexService.simpleService.getUid());
+    }
+
+    @Route('get', '/some-example')
+    public someExample(req, res) {
         res.send(this.complexService.simpleService.getUid());
     }
 }

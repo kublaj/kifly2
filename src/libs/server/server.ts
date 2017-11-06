@@ -1,3 +1,4 @@
+import * as CliTable from 'cli-table';
 import * as express from 'express';
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions as HttpsServerOptions } from 'https';
@@ -22,19 +23,44 @@ export class Server {
         }
     }
 
-    public async createHttpServer() {
-        if (this.isConfigured) {
-            throw new Error('Server (Http) error: a server has been already configured!');
-        }
-        this.server = createHttpServer(this.app);
-        this.server.listen(3033);
+    public async httpServer(port = 8080): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (this.isConfigured) {
+                throw new Error('Server (Http) error: a server has been already configured!');
+            }
+            this.server = createHttpServer(this.app);
+            this.server.listen(port, () => {
+                this.showDebugTable(port, this.members);
+                resolve(port);
+            });
+        });
     }
 
-    public async createHttpsServer(options: HttpsServerOptions = {}) {
-        if (this.isConfigured) {
-            throw new Error('Server (Https) error: a server has been already configured!');
+    public async httpsServer(port = 8080, options: HttpsServerOptions = {}): Promise<any> {
+        return new Promise((resolve, reject) => {
+            if (this.isConfigured) {
+                throw new Error('Server (Https) error: a server has been already configured!');
+            }
+            this.server = createHttpsServer(options, this.app);
+            this.server.listen(port, () => {
+                this.showDebugTable(port, this.members);
+                resolve(port);
+            });
+        });
+    }
+
+    private showDebugTable(port, routes: RouteModel[]) {
+        const table = new CliTable({
+            head: ['Method', 'Controller::Method', 'Path']
+        });
+        for (let route of routes) {
+            table.push([
+                route.httpMethod.toUpperCase(),
+                route.controller.constructor.name + '::' + route.method,
+                route.path
+            ]);
         }
-        this.server = createHttpsServer(options, this.app);
-        this.server.listen(3033);
+
+        console.log(table.toString());
     }
 }

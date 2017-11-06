@@ -15,6 +15,7 @@
     "@types/node": "^8.0.44",
     "@types/promise": "^7.1.30",
     "chai": "^4.1.2",
+    "cli-table": "^0.3.1",
     "express": "^4.16.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
