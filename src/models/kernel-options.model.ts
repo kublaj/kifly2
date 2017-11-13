@@ -10,6 +10,7 @@ export interface KernelServerOptions {
 export interface KernelOptions {
     controllers?: any[];
     services?: any[];
+    documents?: any[];
     events?: any;
-    server?: KernelServerOptions
+    server?: KernelServerOptions | any;
 }

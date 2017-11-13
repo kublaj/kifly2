@@ -47,6 +47,10 @@ export class Container {
         return this.members.count();
     }
 
+    public getMembers() {
+        return this.members.toArray();
+    }
+
     private resolveMember(type: ServiceTypes, id: string, target: any) {
         /**
          * Resolve injected services of requested service

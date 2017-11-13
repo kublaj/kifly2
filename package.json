@@ -7,29 +7,37 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "@types/chai": "^4.0.4",
     "@types/express": "^4.0.39",
     "@types/immutable": "^3.8.7",
     "@types/lodash": "^4.14.80",
-    "@types/mocha": "^2.2.44",
+    "@types/mongoose": "^4.7.25",
     "@types/node": "^8.0.44",
     "@types/promise": "^7.1.30",
-    "chai": "^4.1.2",
     "cli-table": "^0.3.1",
     "express": "^4.16.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
-    "mocha": "^4.0.1",
-    "node-notifier": "^5.1.2",
+    "mongoose": "^4.13.1",
+    "mysql": "^2.15.0",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.2",
     "ts-node": "^3.3.0",
+    "typeorm": "^0.1.2",
     "typescript": "^2.6.1"
   },
   "scripts": {
     "clear": "rm -rf ./dist",
     "example": "yarn clear && ts-node ./example/index.ts",
     "build": "yarn clear && tsc",
-    "test": "mocha --recursive -r ts-node/register './**/*.spec.ts'"
+    "test": "mocha --recursive -r ts-node/register './src/**/*.spec.ts'"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.44",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "get-port": "^3.2.0",
+    "mocha": "^4.0.1",
+    "tslint": "^5.8.0"
   }
 }

@@ -13,11 +13,8 @@ describe('Container', () => {
             SimpleService,
             ComplexService,
             FactoryService
-        ]
-    });
-
-    it('count of registered services should be count of container members', () => {
-        expect(kernel.container.count()).to.equal(3)
+        ],
+        server: false
     });
 
     it('should register services', () => {

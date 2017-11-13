@@ -12,7 +12,8 @@ describe('Kernel', () => {
             SimpleService,
             ComplexService,
             FactoryService
-        ]
+        ],
+        server: false
     });
 
     it('should has properties `controllers` & `services` as array', () => {
