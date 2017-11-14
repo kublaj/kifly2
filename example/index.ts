@@ -23,7 +23,7 @@ const kernel = new Kernel({
     }
 });
 
-
+/**
 createConnection({
     type: "mysql",
     host: "localhost",
@@ -55,3 +55,5 @@ createConnection({
     console.log(u);
     // here you can start to work with your entities
 }).catch(error => console.log(error));
+
+*/
