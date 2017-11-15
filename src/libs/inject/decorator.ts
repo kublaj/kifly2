@@ -3,9 +3,9 @@ import { InjectConstants } from './constants';
 
 export const Inject = (target, key): any => {
     Object.defineProperty(target, key, {
+        configurable: true,
         enumerable: true,
         writable: true,
-        configurable: true
     });
     /**
      * Get injected services
@@ -19,8 +19,8 @@ export const Inject = (target, key): any => {
      * This 'key' will be the property of injected service in future
      */
     alreadyInjected.push({
-        key: key,
-        target: Reflect.getMetadata('design:type', target, key)
+        key,
+        target: Reflect.getMetadata('design:type', target, key),
     });
 
     /**

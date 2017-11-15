@@ -17,7 +17,6 @@
     "express": "^4.16.2",
     "immutable": "^3.8.2",
     "lodash": "^4.17.4",
-    "mongoose": "^4.13.1",
     "mysql": "^2.15.0",
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.5.2",
@@ -29,7 +28,8 @@
     "clear": "rm -rf ./dist",
     "example": "yarn clear && ts-node ./example/index.ts",
     "build": "yarn clear && tsc",
-    "test": "mocha --recursive -r ts-node/register './src/**/*.spec.ts'"
+    "test": "mocha --recursive -r ts-node/register './src/**/*.spec.ts'",
+    "lint": "tslint -c tslint.json './src/**/*.ts'"
   },
   "devDependencies": {
     "@types/chai": "^4.0.4",

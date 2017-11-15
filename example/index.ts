@@ -1,9 +1,6 @@
-import { createConnection } from 'typeorm';
 import { Kernel } from '../src/kernel';
 import { ServerTypes } from '../src/libs/server/server-types';
 import { IndexController } from './controllers/index.controller';
-import { AddressEntity } from './entities/address.entity';
-import { UserEntity } from './entities/user.entity';
 import { ComplexService } from './services/complex.service';
 import { FactoryService } from './services/factory.service';
 import { SimpleService } from './services/simple.service';
@@ -12,19 +9,19 @@ const kernel = new Kernel({
     services: [
         SimpleService,
         ComplexService,
-        FactoryService
+        FactoryService,
     ],
     controllers: [
-        IndexController
+        IndexController,
     ],
     server: {
         serverPort: 3030,
-        serverType: ServerTypes.Http
-    }
+        serverType: ServerTypes.Http,
+    },
 });
 
 /**
-createConnection({
+ createConnection({
     type: "mysql",
     host: "localhost",
     port: 3306,
@@ -56,4 +53,4 @@ createConnection({
     // here you can start to work with your entities
 }).catch(error => console.log(error));
 
-*/
+ */

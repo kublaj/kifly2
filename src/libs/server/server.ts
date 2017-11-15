@@ -20,7 +20,7 @@ export class Server {
     public activateRoutes(container: Container) {
         const requestService: RequestService = container.getMember(RequestService);
 
-        for (let route of this.members) {
+        for (const route of this.members) {
             this.app[route.httpMethod](route.path, (req, res, next) => {
                 requestService.updateRequest(req);
                 return container.resolveController(route.controller.constructor)[route.method](req, res, next);
@@ -58,14 +58,14 @@ export class Server {
 
     private showDebugTable(port, routes: RouteModel[]) {
         const routesTable = new CliTable({
-            head: ['Method', 'Controller::Method', 'Path']
+            head: ['Method', 'Controller::Method', 'Path'],
         });
 
-        for (let route of routes) {
+        for (const route of routes) {
             routesTable.push([
                 route.httpMethod.toUpperCase(),
                 route.controller.constructor.name + '::' + route.method,
-                route.path
+                route.path,
             ]);
         }
 
@@ -75,10 +75,9 @@ export class Server {
         portTable.push(['TYPE', this.type]);
         portTable.push(['PORT', port]);
 
-        /**
-         * Write string
-         */
+        /* tslint:disable-next-line */
         console.log(routesTable.toString());
+        /* tslint:disable-next-line */
         console.log(portTable.toString());
     }
 }

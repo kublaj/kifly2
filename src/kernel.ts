@@ -7,22 +7,31 @@ import { KernelOptions, KernelServerOptions } from './models/kernel-options.mode
 import { RequestService } from './services/request.service';
 
 export class Kernel {
+    public container = new Container();
+    public server = new Server();
+
     private controllers: any;
     private services: any;
     private documents: any;
-    public container = new Container();
-    public server = new Server();
 
     constructor(options: KernelOptions) {
         this.controllers = options.controllers || [];
         this.services = options.services || [];
         this.documents = options.documents || [];
+
         /**
          * Register default services
          */
         this.container.addMember(RequestService);
 
+        /**
+         * Activate Service
+         */
         this.activateServices();
+
+        /**
+         * Activate Controllers
+         */
         this.activateController();
 
         if (options.server) {
@@ -33,15 +42,15 @@ export class Kernel {
     }
 
     private activateServices() {
-        this.services.forEach(item => {
+        this.services.forEach((item) => {
             this.container.addMember(item);
         });
     }
 
     private activateController() {
-        this.controllers.forEach(controller => {
-            this.container.resolveController(controller, controller => {
-                this.configureController(controller);
+        this.controllers.forEach((controller) => {
+            this.container.resolveController(controller, (decorated) => {
+                this.configureController(decorated);
             });
         });
     }
@@ -51,7 +60,7 @@ export class Kernel {
          * Resolve routes for express
          */
         const routes: RouteModel[] = Reflect.getMetadata(RouteConstants.InjectedRoutes, controller) || [];
-        for (let route of routes) {
+        for (const route of routes) {
             this.server.addRoute(route);
         }
     }

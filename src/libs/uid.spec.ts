@@ -7,7 +7,7 @@ describe('UidLib', () => {
         const unique1 = UidLib.generate();
         const unique2 = UidLib.generate();
 
-        expect(unique1).not.to.equal(unique2)
+        expect(unique1).not.to.equal(unique2);
     });
 
     it('should be correct length', () => {

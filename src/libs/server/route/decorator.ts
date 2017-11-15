@@ -6,11 +6,11 @@ export const Route = (method?: string, path?: string, options?: any) => {
     return (target, key): any => {
         const routes = Reflect.getMetadata(RouteConstants.InjectedRoutes, target.constructor) || [];
         routes.push(new RouteModel({
-            httpMethod: method,
-            path: path,
-            options: options,
             controller: target,
-            method: key
+            httpMethod: method,
+            method: key,
+            options,
+            path,
         }));
         Reflect.defineMetadata(RouteConstants.InjectedRoutes, routes, target.constructor);
         return target;

@@ -9,7 +9,7 @@ export class Container {
     private resolveSingletons: Map<string, any> = Map({}).asMutable();
 
     public addMember(member: any) {
-        this.members.set(Reflect.getMetadata(ServiceConstants.DecoratorId, member), member)
+        this.members.set(Reflect.getMetadata(ServiceConstants.DecoratorId, member), member);
     }
 
     public getMember(member: any, beforeMiddleware?: any) {
@@ -18,7 +18,8 @@ export class Container {
         const target = this.members.get(id);
 
         if (!id || !type) {
-            throw new Error(`${member.name || member.constructor.name} is not a service! Use @Service or @Controller decorator`);
+            throw new Error(`${member.name || member.constructor.name} is not a service!
+             Use @Service or @Controller decorator`);
         }
 
         if (!target) {
@@ -55,7 +56,7 @@ export class Container {
         /**
          * Resolve injected services of requested service
          */
-        for (let item of Reflect.getMetadata(InjectConstants.InjectedServices, target) || []) {
+        for (const item of Reflect.getMetadata(InjectConstants.InjectedServices, target) || []) {
             target.prototype[item.key] = this.getMember(item.target);
         }
 

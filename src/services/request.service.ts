@@ -1,6 +1,6 @@
+import { QueryLib } from '../libs/query.lib';
 import { Service } from '../libs/service/decorator';
 import { ServiceTypes } from '../libs/service/type';
-import { QueryLib } from '../libs/query.lib';
 
 @Service(ServiceTypes.Singleton)
 export class RequestService {

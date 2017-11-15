@@ -4,16 +4,15 @@ import { FactoryService } from '../example/services/factory.service';
 import { SimpleService } from '../example/services/simple.service';
 import { Kernel } from './kernel';
 
-
 describe('Kernel', () => {
 
-    let kernel = new Kernel({
+    const kernel = new Kernel({
+        server: false,
         services: [
             SimpleService,
             ComplexService,
-            FactoryService
+            FactoryService,
         ],
-        server: false
     });
 
     it('should has properties `controllers` & `services` as array', () => {

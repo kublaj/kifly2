@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 
-import { BaseEntity, Column, JoinColumn, JoinTable, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Entity } from 'typeorm/decorator/entity/Entity';
 import { AddressEntity } from './address.entity';
 

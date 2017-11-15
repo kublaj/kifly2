@@ -8,13 +8,13 @@ const UID_LENTGH = 24;
 
 describe('Container', () => {
 
-    let kernel = new Kernel({
+    const kernel = new Kernel({
+        server: false,
         services: [
             SimpleService,
             ComplexService,
-            FactoryService
+            FactoryService,
         ],
-        server: false
     });
 
     it('should register services', () => {
@@ -43,7 +43,7 @@ describe('Container', () => {
             .that.lengthOf(UID_LENTGH);
     });
 
-    it('[Factories (FactoryService)] should be generated and should has unique initialization after constructing', () => {
+    it('[Factories (FactoryService)] should be generated and should has unique initialization', () => {
         const member1: FactoryService = kernel.container.getMember(FactoryService);
         const member2: FactoryService = kernel.container.getMember(FactoryService);
 
