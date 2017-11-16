@@ -2,7 +2,7 @@ import * as CliTable from 'cli-table';
 import * as express from 'express';
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions as HttpsServerOptions } from 'https';
-import { RequestService } from '../../services/request.service';
+import { IoService } from '../../services/io.service';
 import { Container } from '../container/container';
 import { RouteModel } from './route/model';
 
@@ -18,11 +18,12 @@ export class Server {
     }
 
     public activateRoutes(container: Container) {
-        const requestService: RequestService = container.getMember(RequestService);
+        const ioService: IoService = container.getMember(IoService);
 
         for (const route of this.members) {
             this.app[route.httpMethod](route.path, (req, res, next) => {
-                requestService.updateRequest(req);
+                ioService.updateRequest(req);
+                ioService.updateResponse(res);
                 return container.resolveController(route.controller.constructor)[route.method](req, res, next);
             });
         }
