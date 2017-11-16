@@ -35,6 +35,7 @@ export class Kernel {
         this.activateController();
 
         if (options.server) {
+            this.server.configureFramework(options.server.configureFramework);
             this.server.activateRoutes(this.container);
             this.startServer(options.server || {});
         }

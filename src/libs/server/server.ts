@@ -1,5 +1,6 @@
 import * as CliTable from 'cli-table';
 import * as express from 'express';
+import { Express } from 'express';
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions as HttpsServerOptions } from 'https';
 import { IoService } from '../../services/io.service';
@@ -13,13 +14,20 @@ export class Server {
     private isConfigured = false;
     private type = 'http';
 
+    public configureFramework(callbackFunction: (app: Express.Application | any, express: any) => void) {
+        if (!callbackFunction) {
+            return;
+        }
+        return callbackFunction(this.app, express);
+    }
+
     public addRoute(route: RouteModel) {
         this.members.push(route);
     }
 
     public activateRoutes(container: Container) {
         const ioService: IoService = container.getMember(IoService);
-
+        ioService.updateApp(this.app);
         for (const route of this.members) {
             this.app[route.httpMethod](route.path, (req, res, next) => {
                 ioService.updateRequest(req);
