@@ -1,7 +1,7 @@
 {
   "name": "kifly2",
   "version": "0.0.1",
-  "description": "NodeJs Module Framework for modular backend",
+  "description": "NodeJs Backend Application Framework",
   "main": "dist/index.ts",
   "author": "Bence Pimpli <pimplibence@gmail.com>",
   "license": "MIT",
