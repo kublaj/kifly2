@@ -1,3 +1,5 @@
+import { join } from 'path';
+
 export class RouteModel {
     public httpMethod: string;
     public path: string;
@@ -11,5 +13,11 @@ export class RouteModel {
         this.options = options.options;
         this.controller = options.controller;
         this.method = options.method;
+    }
+
+    public updatePath?(basePath, path): RouteModel {
+        this.path = join(basePath, path);
+
+        return this;
     }
 }

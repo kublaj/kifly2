@@ -1,3 +1,4 @@
+import { Map } from 'immutable';
 import { Container } from './libs/container/container';
 import { RouteConstants } from './libs/server/route/constants';
 import { RouteModel } from './libs/server/route/model';
@@ -50,9 +51,13 @@ export class Kernel {
 
     private activateController() {
         this.controllers.forEach((controller) => {
-            this.container.resolveController(controller, (decorated) => {
+            const constructed = this.container.resolveController(controller, (decorated) => {
                 this.configureController(decorated);
             });
+
+            if (constructed.onMounted) {
+                constructed.onMounted();
+            }
         });
     }
 
@@ -60,10 +65,11 @@ export class Kernel {
         /**
          * Resolve routes for express
          */
-        const routes: RouteModel[] = Reflect.getMetadata(RouteConstants.InjectedRoutes, controller) || [];
-        for (const route of routes) {
+        const routes: Map<string, RouteModel> = Reflect.getMetadata(RouteConstants.InjectedRoutes, controller);
+        const controllerBasePath: string = Reflect.getMetadata(RouteConstants.ControllerBasePath, controller) || '/';
+        routes.forEach((route) => {
             this.server.addRoute(route);
-        }
+        });
     }
 
     private async startServer(options: KernelServerOptions) {
