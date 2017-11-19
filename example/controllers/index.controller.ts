@@ -1,7 +1,7 @@
 import { Controller } from '../../src/libs/controller/decorator';
+import { CrudControllerGenerator } from '../../src/libs/controller/libs/crud-controller.generator';
 import { Inject } from '../../src/libs/inject/decorator';
 import { Route } from '../../src/libs/server/route/decorator';
-import { CrudControllerGenerator } from '../libs/crud-controller.generator';
 import { ComplexService } from '../services/complex.service';
 import { ExampleCrudService } from '../services/example-crud.service';
 

@@ -1,6 +1,6 @@
+import { CrudServiceInterface } from '../../src/libs/controller/libs/crud-service.interface';
 import { Service } from '../../src/libs/service/decorator';
 import { ServiceTypes } from '../../src/libs/service/type';
-import { CrudServiceInterface } from '../libs/crud-service.interface';
 
 @Service(ServiceTypes.Factory)
 export class ExampleCrudService implements CrudServiceInterface<any> {

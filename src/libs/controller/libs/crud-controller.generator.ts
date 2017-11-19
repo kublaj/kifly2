@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Route } from '../../src/libs/server/route/decorator';
+import { Route } from '../../server/route/decorator';
 import { CrudServiceInterface } from './crud-service.interface';
 
 export class CrudControllerGenerator {
