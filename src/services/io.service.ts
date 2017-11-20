@@ -41,4 +41,8 @@ export class IoService {
     public updateApp(app: Express.Application | any) {
         this.app = app;
     }
+
+    public getApp(): Express.Application | any {
+        return this.app;
+    }
 }

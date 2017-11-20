@@ -1,3 +1,4 @@
+import * as bodyParser from 'body-parser';
 import { Kernel } from '../src/kernel';
 import { ServerTypes } from '../src/libs/server/server-types';
 import { IndexController } from './controllers/index.controller';
@@ -11,6 +12,10 @@ const kernel = new Kernel({
         IndexController,
     ],
     server: {
+        configureFramework: (app: Express.Application | any) => {
+            /* CrudGenerator Dep */
+            app.use(bodyParser.json());
+        },
         serverPort: 3030,
         serverType: ServerTypes.Http,
     },

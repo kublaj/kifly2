@@ -1,7 +1,6 @@
 import { Controller } from '../../src/libs/controller/decorator';
 import { CrudControllerGenerator } from '../../src/libs/controller/libs/crud-controller.generator';
 import { Inject } from '../../src/libs/inject/decorator';
-import { Route } from '../../src/libs/server/route/decorator';
 import { ComplexService } from '../services/complex.service';
 import { ExampleCrudService } from '../services/example-crud.service';
 
@@ -13,10 +12,5 @@ export class IndexController extends CrudControllerGenerator {
     constructor() {
         super();
         this.setCrudSource(this.exampleCrudSource);
-    }
-
-    @Route('get', '/:id')
-    public rewriteAController(req, res) {
-        res.send(this.complexService.simpleService.getUid());
     }
 }

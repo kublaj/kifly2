@@ -1,13 +1,12 @@
 import 'reflect-metadata';
+import { IoService } from '../../../services/io.service';
+import { Inject } from '../../inject/decorator';
 import { Route } from '../../server/route/decorator';
 import { CrudServiceInterface } from './crud-service.interface';
 
 export class CrudControllerGenerator {
+    @Inject private ioService: IoService;
     private generatorSourceService: CrudServiceInterface<any>;
-
-    public setCrudSource(service: CrudServiceInterface<any>) {
-        this.generatorSourceService = service;
-    }
 
     @Route('get', '')
     public async listItems(req, res) {
@@ -79,9 +78,17 @@ export class CrudControllerGenerator {
         }
     }
 
+    public setCrudSource(service: CrudServiceInterface<any>) {
+        this.generatorSourceService = service;
+    }
+
     private checkInitialization() {
         if (!this.generatorSourceService) {
             throw new Error('Crud generator service is must be initialized with a source service');
+        }
+
+        if (typeof (this.ioService.getRequest() as any).body === 'undefined') {
+            throw new Error('Crud generator service depends on "body-parser" express middleware');
         }
     }
 }

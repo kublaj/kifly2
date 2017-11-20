@@ -28,6 +28,7 @@ export class Server {
     public activateRoutes(container: Container) {
         const ioService: IoService = container.getMember(IoService);
         ioService.updateApp(this.app);
+
         for (const route of this.members) {
             this.app[route.httpMethod](route.path, (req, res, next) => {
                 ioService.updateRequest(req);
