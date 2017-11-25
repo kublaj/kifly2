@@ -14,7 +14,7 @@ export class CrudControllerGenerator {
 
         try {
             res.status(200).json({
-                payload: await this.generatorSourceService.list(req.query),
+                payload: await this.generatorSourceService.listItems(req.query),
             });
         } catch (error) {
             res.status(500).send(error);
@@ -28,7 +28,7 @@ export class CrudControllerGenerator {
 
         try {
             res.status(200).json({
-                payload: await this.generatorSourceService.create(body, req.query),
+                payload: await this.generatorSourceService.createItem(body, req.query),
             });
         } catch (error) {
             res.status(500).send(error);
@@ -41,10 +41,19 @@ export class CrudControllerGenerator {
         const id = req.params.id;
 
         try {
+            const item = await this.generatorSourceService.getItem(id, req.query);
+
+            if (!item) {
+                res.status(404).send('NOT_FOUND');
+                return;
+            }
+
             res.status(200).json({
-                payload: await this.generatorSourceService.get(id, req.query),
+                payload: item,
             });
         } catch (error) {
+            /* tslint:disable-next-line */
+            console.log(error);
             res.status(500).send(error);
         }
     }
@@ -57,7 +66,7 @@ export class CrudControllerGenerator {
 
         try {
             res.status(200).json({
-                payload: await this.generatorSourceService.update(id, body, req.query),
+                payload: await this.generatorSourceService.updateItem(id, body, req.query),
             });
         } catch (error) {
             res.status(500).send(error);
@@ -71,7 +80,7 @@ export class CrudControllerGenerator {
 
         try {
             res.status(200).json({
-                payload: await this.generatorSourceService.remove(id, req.query),
+                payload: await this.generatorSourceService.deleteItem(id, req.query),
             });
         } catch (error) {
             res.status(500).send(error);

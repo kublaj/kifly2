@@ -1,4 +1,5 @@
 import { ServerOptions as HttpsServerOptions } from 'https';
+import { ConnectionOptions } from 'typeorm';
 import { ServerTypes } from '../libs/server/server-types';
 
 export interface KernelServerOptions {
@@ -11,7 +12,7 @@ export interface KernelServerOptions {
 export interface KernelOptions {
     controllers?: any[];
     services?: any[];
-    documents?: any[];
+    orm?: ConnectionOptions | ConnectionOptions[];
     events?: any;
     server?: KernelServerOptions | any;
 }
