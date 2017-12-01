@@ -14,7 +14,7 @@ export class IoService {
         this.request = request;
     }
 
-    public getRequest(): Express.Request {
+    public getRequest(): Express.Request | any {
         return this.request;
     }
 
@@ -22,7 +22,7 @@ export class IoService {
         this.response = response;
     }
 
-    public getResponse(): Express.Response {
+    public getResponse(): Express.Response | any {
         return this.response;
     }
 

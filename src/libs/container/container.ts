@@ -40,8 +40,8 @@ export class Container {
         if (beforeMiddleware && typeof beforeMiddleware === 'function') {
             beforeMiddleware(target);
         }
-
-        return this.resolveMember(ServiceTypes.Singleton, null, target);
+        const id = Reflect.getMetadata(ServiceConstants.DecoratorId, target);
+        return this.resolveMember(ServiceTypes.Singleton, id, target);
     }
 
     public count(): number {

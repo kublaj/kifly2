@@ -28,11 +28,12 @@ export class Server {
     public activateRoutes(container: Container) {
         const ioService: IoService = container.getMember(IoService);
         ioService.updateApp(this.app);
-        for (const route of this.members) {
+
+        this.members.forEach((route: RouteModel) => {
             this.app[route.httpMethod](route.path, (req, res, next) => {
                 return container.resolveController(route.controller.constructor)[route.method](req, res, next);
             });
-        }
+        });
     }
 
     public async httpServer(port = 8080): Promise<any> {

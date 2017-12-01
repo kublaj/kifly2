@@ -72,7 +72,7 @@ export class Kernel {
             });
 
             if (constructed.onMounted) {
-                constructed.onMounted();
+                constructed.onMounted(this.container);
             }
         });
     }

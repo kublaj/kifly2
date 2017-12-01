@@ -16,10 +16,10 @@ export const Controller = (basePath: string = '/'): any => {
         /**
          * Remap and update routes
          */
-        const routes = Reflect.getMetadata(RouteConstants.InjectedRoutes, target) || Map({}).asImmutable();
+        const routes = Reflect.getMetadata(RouteConstants.InjectedRoutes, target) || Map({});
         const remapped = Map({}).asMutable();
         routes.forEach((route: RouteModel, key) => {
-            remapped.set(join(basePath, key), route.updatePath(basePath, route.path));
+            remapped.set(UidLib.toHex(join(basePath, key)), route.updatePath(basePath, route.path));
         });
 
         Reflect.defineMetadata(RouteConstants.InjectedRoutes, remapped, target.constructor);
