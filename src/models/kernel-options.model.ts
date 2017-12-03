@@ -12,7 +12,6 @@ export interface KernelServerOptions {
 export interface KernelOptions {
     controllers?: any[];
     services?: any[];
-    orm?: ConnectionOptions | ConnectionOptions[];
     events?: any;
     server?: KernelServerOptions | any;
 }

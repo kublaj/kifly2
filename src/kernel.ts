@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import { Connection } from 'typeorm';
 import { Container } from './libs/container/container';
 import { RouteConstants } from './libs/server/route/constants';
 import { RouteModel } from './libs/server/route/model';
@@ -31,11 +30,6 @@ export class Kernel {
 
     private async start(options: KernelOptions) {
         /**
-         * Activate Orm
-         */
-        await this.activateOrm(options.orm);
-
-        /**
          * Activate Service
          */
         this.activateServices();
@@ -50,13 +44,6 @@ export class Kernel {
             this.server.activateRoutes(this.container);
             this.startServer(options.server || {});
         }
-    }
-
-    private async activateOrm(ormOptions): Promise<any | Connection> {
-        if (!ormOptions) {
-            return Promise.resolve();
-        }
-        return (this.container.getMember(OrmService) as OrmService).initialize(ormOptions);
     }
 
     private activateServices() {

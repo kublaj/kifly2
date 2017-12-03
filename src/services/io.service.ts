@@ -8,7 +8,6 @@ export class IoService {
     private app: Express.Application | any;
     private request: Express.Request | any;
     private response: Express.Response | any;
-    private avg = 0;
 
     public updateRequest(request: Express.Request | any) {
         this.request = request;
@@ -34,11 +33,10 @@ export class IoService {
          * Register start time to benchmark
          */
         this.app.use((request, response, next) => {
-            const startOfRequest = now();
-
+            request.startedAt = now();
             request.query = QueryLib.parse(request);
             response.on('finish', () => {
-                this.logRequest(request, startOfRequest, now());
+                this.logRequest(request);
             });
 
             this.request = request;
@@ -51,9 +49,8 @@ export class IoService {
         return this.app;
     }
 
-    private logRequest(req, startedAt, endedAt) {
-        const requestTime = (endedAt - startedAt) / 10e3;
-        this.avg = (requestTime + this.avg) / 2;
+    private logRequest(req) {
+        const requestTime = (now() - req.startedAt) / 10e3;
         /* tslint:disable-next-line */
         console.log(req.url, `${requestTime} ms`);
     }
