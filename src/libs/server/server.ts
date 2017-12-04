@@ -3,7 +3,8 @@ import * as express from 'express';
 import { Express } from 'express';
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions as HttpsServerOptions } from 'https';
-import { IoService } from '../../services/io.service';
+import { RequestParserMiddleware } from '../../plugins/request-parser.middleware';
+import { RequestTimeMiddleware } from '../../plugins/request-time.express-middleware';
 import { Container } from '../container/container';
 import { RouteModel } from './route/model';
 
@@ -26,8 +27,11 @@ export class Server {
     }
 
     public activateRoutes(container: Container) {
-        const ioService: IoService = container.getMember(IoService);
-        ioService.updateApp(this.app);
+        /**
+         * Register default middleware(s)
+         */
+        this.app.use(RequestTimeMiddleware(container));
+        this.app.use(RequestParserMiddleware(container));
 
         this.members.forEach((route: RouteModel) => {
             this.app[route.httpMethod](route.path, (req, res, next) => {

@@ -6,7 +6,7 @@ export class IndexController {
 
     @Route('get', '')
     public indexEndpoint(req, res) {
-        res.render('index/index.pug');
+        res.status(200).send();
     }
 
 }
