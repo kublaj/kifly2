@@ -1,5 +1,5 @@
 {
-  "name": "@kifly2",
+  "name": "kifly2",
   "version": "0.0.1",
   "description": "NodeJs Backend Application Framework",
   "main": "dist/index.ts",
