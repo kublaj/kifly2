@@ -1,9 +1,9 @@
 import * as querystring from 'querystring';
-import { parse } from 'url';
+import { resolve, URL } from 'url';
 
 export class QueryLib {
-    public static parse?(req: Express.Request | any): any {
-        const url = parse(req.url);
-        return querystring.parse(url.query);
+    public static parse?(url: string): any {
+        const parsed = new URL(resolve('http://a.b', url));
+        return querystring.parse(parsed.searchParams.toString());
     }
 }

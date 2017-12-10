@@ -1,7 +1,6 @@
 import * as bodyParser from 'body-parser';
 import { Kernel } from '../src/kernel';
 import { ServerTypes } from '../src/libs/server/server-types';
-import { Log } from '../src/plugins/logger/log';
 import { ExampleController } from './controllers/example.controller';
 import { IndexController } from './controllers/index.controller';
 import { ComplexService } from './services/complex.service';
