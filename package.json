@@ -1,8 +1,8 @@
 {
   "name": "kifly2",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "NodeJs Backend Application Framework",
-  "main": "dist/index.ts",
+  "main": "index.js",
   "author": "Bence Pimpli <pimplibence@gmail.com>",
   "license": "MIT",
   "private": false,
