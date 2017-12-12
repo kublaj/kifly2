@@ -27,6 +27,7 @@
   },
   "scripts": {
     "clear": "rm -rf ./dist",
+    "copy_dist_files": "",
     "example": "yarn lint && yarn clear && ts-node ./example/index.ts",
     "build": "yarn lint && yarn clear && tsc",
     "test": "yarn lint && mocha --recursive -r ts-node/register './src/**/*.spec.ts'",
