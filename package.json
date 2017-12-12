@@ -27,8 +27,9 @@
   },
   "scripts": {
     "clear": "rm -rf ./dist",
+    "copy_dist_files": "cp package.json dist && cp readme.md dist",
     "example": "yarn lint && yarn clear && ts-node ./example/index.ts",
-    "build": "yarn lint && yarn clear && tsc && cp package.json dist",
+    "build": "yarn lint && yarn clear && tsc && yarn copy_dist_files",
     "test": "yarn lint && mocha --recursive -r ts-node/register './src/**/*.spec.ts'",
     "lint:src": "tslint -c tslint.json './src/**/*.ts'",
     "lint:example": "tslint -c tslint.json './example/**/*.ts'",
