@@ -8,15 +8,6 @@ export class QueryLib {
     }
 
     private static getParsed(url: string): string {
-        /*
-        const under6 = semver.lt(process.version, '7.0.0');
-
-        if (under6) {
-            return parse(url).query.toString();
-        } else {
-            return parse(url).query.toString();
-        }
-         */
-        return parse(url).query.toString();
+        return (parse(url).query || {}).toString();
     }
 }
