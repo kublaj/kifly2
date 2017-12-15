@@ -3,6 +3,7 @@ import * as express from 'express';
 import { Express } from 'express';
 import { createServer as createHttpServer, Server as HttpServer } from 'http';
 import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions as HttpsServerOptions } from 'https';
+import { ExpressIoService } from '../../plugins/express-io.service';
 import { RequestParserMiddleware } from '../../plugins/request-parser.middleware';
 import { RequestTimeMiddleware } from '../../plugins/request-time.express-middleware';
 import { Container } from '../container/container';
@@ -27,6 +28,7 @@ export class Server {
     }
 
     public activateRoutes(container: Container) {
+        const expressIoService: ExpressIoService = container.getMember(ExpressIoService);
         /**
          * Register default middleware(s)
          */
@@ -35,6 +37,9 @@ export class Server {
 
         this.members.forEach((route: RouteModel) => {
             this.app[route.httpMethod](route.path, (req, res, next) => {
+                expressIoService.updateApp(this.app);
+                expressIoService.updateRequest(req);
+                expressIoService.updateResponse(res);
                 return container.resolveController(route.controller.constructor)[route.method](req, res, next);
             });
         });

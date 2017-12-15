@@ -1,6 +1,6 @@
 {
   "name": "kifly2",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "NodeJs Backend Application Framework",
   "main": "index.js",
   "author": "Bence Pimpli <pimplibence@gmail.com>",

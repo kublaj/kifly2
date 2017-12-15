@@ -5,6 +5,7 @@ import { RouteModel } from './libs/server/route/model';
 import { Server } from './libs/server/server';
 import { ServerTypes } from './libs/server/server-types';
 import { KernelOptions, KernelServerOptions } from './models/kernel-options.model';
+import { ExpressIoService } from './plugins/express-io.service';
 import { LoggerService } from './plugins/logger/logger.service';
 
 export class Kernel {
@@ -22,6 +23,7 @@ export class Kernel {
          * Register default services
          */
         this.container.addMember(LoggerService);
+        this.container.addMember(ExpressIoService);
 
         this.start(options);
     }
